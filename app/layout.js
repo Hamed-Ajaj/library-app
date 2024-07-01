@@ -1,6 +1,10 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-
+import { AuthProvider } from "@/utils/AuthContext";
+import Header from "@/components/Header";
+import { ProfileProvider } from "@/utils/ProfileContext";
+import Footer from "@/components/Footer";
+import { BooksProvider } from "@/utils/BooksContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -11,7 +15,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <BooksProvider>
+          <ProfileProvider>
+            <AuthProvider>
+              <Header />
+              {children}
+              <Footer />
+            </AuthProvider>
+          </ProfileProvider>
+        </BooksProvider>
+      </body>
     </html>
   );
 }

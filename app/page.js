@@ -1,11 +1,12 @@
-
-import LoginPage from "./login/page";
-import HomePage from "../components/HomePage";
+"use client"
+import Books from "@/components/Books";
+import Hero from "@/components/Hero";
 export default function Home() {
-  const user = false
-  return (
-    <>
-      {user ? (<HomePage/> ) : (<LoginPage />)}
-    </>
-  );
+  return(
+      <>
+        <Hero />
+        <Books />
+      </>
+      )
+
 }
