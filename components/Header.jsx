@@ -10,6 +10,18 @@ import { useProfile } from '@/utils/ProfileContext'
 import { useMotionValueEvent, useScroll } from "framer-motion"
 import { links } from '@/utils/constants'
 
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarTrigger,
+} from "@/components/ui/menubar"
+
+
+
 const Header = () => {
   const [headerBg, setHeaderBg] = useState(null)
   const { scrollY } = useScroll()
@@ -64,3 +76,4 @@ const Header = () => {
 }
 
 export default Header
+

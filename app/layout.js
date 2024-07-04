@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import { ProfileProvider } from "@/utils/ProfileContext";
 import Footer from "@/components/Footer";
 import { BooksProvider } from "@/utils/BooksContext";
+import { CartProvider } from "@/utils/CartContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+      <CartProvider>
         <BooksProvider>
           <ProfileProvider>
             <AuthProvider>
@@ -25,6 +27,7 @@ export default function RootLayout({ children }) {
             </AuthProvider>
           </ProfileProvider>
         </BooksProvider>
+      </CartProvider>
       </body>
     </html>
   );

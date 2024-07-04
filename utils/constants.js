@@ -203,7 +203,16 @@ export const cart = [
         id: 1,
         bookName: "The Alchemist",
         author: "Paulo Coelho",
+        img:"/TheDaVinci.jpeg",
         price: 15,
         quantity: 1
     },
+    {
+        id: 2,
+        bookName: "The Da Vinci Code",
+        author: "Dan Brown",
+        img:"/TheDaVinci.jpeg",
+        price: 12,
+        quantity: 1
+    }
 ]

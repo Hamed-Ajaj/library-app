@@ -3,6 +3,7 @@ import { createContext, useState, useEffect, useContext } from "react";
 import { account } from "../app/Config";
 import { ID} from 'appwrite';
 import { useRouter } from "next/navigation";
+import { Progress } from "@radix-ui/react-progress";
 
 
 const AuthContext = createContext();
@@ -100,7 +101,7 @@ export const AuthProvider = ({ children }) => {
 
     return(
         <AuthContext.Provider value={contextData}>
-            {loading ? <p>Loading...</p> : children}
+            {loading ? <Progress value={33}/> : children}
         </AuthContext.Provider>
     )
 

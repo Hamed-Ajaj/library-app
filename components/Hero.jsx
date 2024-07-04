@@ -5,7 +5,7 @@ const Hero = () => {
   return (
     <section className='py-20 mt-10 px-14 flex  relative'>
         <div className='flex flex-col w-1/2 items-start justify-center gap-y-10'>
-            <h1 className='uppercase w-full font-bold text-[95px] leading-[1.3]'>read and add <br /> your insight</h1>
+            <h1 className='uppercase w-full font-bold text-[95px] leading-[1.3]'>read and add  your insight</h1>
             <p className='text-[25px] font-[400]'>Find Your Favorite Book and Read it Here for Free</p>
             <div className='relative'>   
                 <Search className='absolute top-4 left-2'/>
