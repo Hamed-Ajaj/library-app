@@ -16,6 +16,10 @@ export const CartProvider = ({ children }) => {
         setLoading(false)
     }
     const addToCart = (product) => {
+        const addProduct = POST("http://localhost:3000/api/cart", product, "POST");
+        if (!addProduct.ok) {
+            throw new Error("Failed to add item to cart");
+        }
         setCart([...cart, product]);
     }
 
