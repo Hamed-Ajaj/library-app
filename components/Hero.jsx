@@ -1,6 +1,7 @@
 import React from 'react'
 import { Search } from 'lucide-react'
 import Input from './Input'
+import { ComboboxDemo } from './ui/combox'
 const Hero = () => {
   return (
     <section className='py-20 mt-10 px-14 flex  relative'>
@@ -10,6 +11,9 @@ const Hero = () => {
             <div className='relative'>   
                 <Search className='absolute top-4 left-2'/>
                 <Input />
+            </div>
+            <div>
+              
             </div>
         </div>
         <div className='absolute -top-10 right-0 z-[-1] object-fill'>

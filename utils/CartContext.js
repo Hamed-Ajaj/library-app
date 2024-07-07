@@ -1,6 +1,6 @@
 "use client"
 
-import { DELETE } from "@/app/api/cart/route";
+import { DELETE, POST } from "@/app/api/cart/route";
 import { createContext, useState, useEffect, useContext } from "react";
 
 const CartContext = createContext();
@@ -16,10 +16,17 @@ export const CartProvider = ({ children }) => {
         setLoading(false)
     }
     const addToCart = (product) => {
-        const addProduct = POST("http://localhost:3000/api/cart", product, "POST");
-        if (!addProduct.ok) {
-            throw new Error("Failed to add item to cart");
-        }
+        // const addProduct = fetch("http://localhost:3000/api/cart", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     body: (product),
+        // });
+        // if (!addProduct.ok) {
+        //     throw new Error("Failed to add product to cart");
+        // }
+        // console.log(product)
         setCart([...cart, product]);
     }
 

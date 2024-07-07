@@ -4,10 +4,14 @@ export async function GET() {
     return NextResponse.json(cart)
 }
 
-export async function POST(request) {
-    const data = await request.json()
-    cart.push(data)
-    return NextResponse.json(cart)
+
+export async function handler(req, res) {
+    if (req.method === 'POST') {
+        return res.status(201).json({
+            bookName:"name1",
+            price:5
+        })
+    }
 }
 
 
@@ -29,25 +33,25 @@ export async function POST(request) {
 //     } else {
 //       return res.status(405).json({ message: 'Method not allowed' });
 //     }
-//   }
-export async function PUT(request) {
-    const data = await request.json()
-    const index = cart.findIndex((item) => item.id == data.id)
-    cart[index] = data
-    return NextResponse.json(cart)
-}
+// //   }
+// export async function PUT(request) {
+//     const data = await request.json()
+//     const index = cart.findIndex((item) => item.id == data.id)
+//     cart[index] = data
+//     return NextResponse.json(cart)
+// }
 
-export async function DELETE({params}) {
-    const index = cart.findIndex((item) => item.id == params.id)
-    const deletedItem = cart[index]
-    cart.splice(index, 1)
-    return NextResponse.json(deletedItem)
-}
+// export async function DELETE({params}) {
+//     const index = cart.findIndex((item) => item.id == params.id)
+//     const deletedItem = cart[index]
+//     cart.splice(index, 1)
+//     return NextResponse.json(deletedItem)
+// }
 
-export async function PATCH(request) {
-    const data = await request.json()
-    const index = cart.findIndex((item) => item.id == data.id)
-    cart[index].quantity = data.quantity
-    return NextResponse.json(cart)
-}
+// export async function PATCH(request) {
+//     const data = await request.json()
+//     const index = cart.findIndex((item) => item.id == data.id)
+//     cart[index].quantity = data.quantity
+//     return NextResponse.json(cart)
+// }
 

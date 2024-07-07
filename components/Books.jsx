@@ -3,9 +3,11 @@ import React, { useEffect } from 'react'
 import { useBooks } from '@/utils/BooksContext'
 import BookCard from './BookCard';
 import { usePathname } from 'next/navigation';
+import BooksGenre from './BooksGenre';
+
 
 const Books = () => {
-    const { books,getBooks,addBook,filterBooks } = useBooks();
+    const { books,getBooks,addBook,filterBooks,genre } = useBooks();
 
     const pathname = usePathname();
 
@@ -26,7 +28,8 @@ const Books = () => {
     
     return (
     <div className='flex flex-col gap-8 items-center justify-center mb-20 mt-20' >
-        <h1 className='text-[40px] font-bold '>Books</h1>
+      <BooksGenre />
+        <h1 className='text-[40px] font-bold '>{genre} Books</h1>
         <div className='grid grid-cols-3 gap-x-4 gap-y-8'>
           {books && books?.map((book) => (
             <BookCard key={book.id} book={book} />

@@ -8,7 +8,11 @@ const BooksContext = createContext();
 export const BooksProvider = ({ children }) => {
     const [books, setBooks] = useState(null);
     const [loading, setLoading] = useState(true);
-    
+    const [genre, setGenre] = useState("All");
+
+    const handleGenreChange = (genre) =>{
+        setGenre(genre)
+    }
     
     const getBooks = async () => {
         setLoading(true);
@@ -46,6 +50,8 @@ export const BooksProvider = ({ children }) => {
         filterBooks,
         filterBooksByGenre,
         addBook,
+        genre,
+        handleGenreChange
     }
 
     useEffect(() => {
