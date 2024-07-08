@@ -35,13 +35,12 @@ export const AuthProvider = ({ children }) => {
         try {
             await account.deleteSession('current');
             setUser(null)
+            router.back()
         } catch (error) {
             console.error(error)
         }
         setLoading(false)
-        return(
-            <p>Logged out</p>
-        )
+        
     }
 
     const registerUser = async (userInfo) =>{

@@ -31,10 +31,10 @@ const RegisterPage = () => {
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full sm:w-[300px] md:w-[400px] justify-center items- gap-8 relative ">
                 <div className="flex flex-col gap-1">
-                    <label htmlFor="name" className="text-[1rem] font-semibold ">Name</label>
+                    <label htmlFor="name" className="text-[1rem] font-semibold ">FullName</label>
                     <input 
                     type="text" 
-                    placeholder="Name" 
+                    placeholder="FullName" 
                     id="name" 
                     {...register("name", { required: true, maxLength: 20 })} 
                     className='border w-full border-[#D9D9D9] p-3  rounded-xl'/>

@@ -38,9 +38,6 @@ const Header = () => {
   const login = pathname === '/login' || pathname === '/register' ? 'hidden' : 'flex'
   const {user,logoutUser} = useAuth()
   const {profile} = useProfile()
-  const setActiveLink = (path) => {
-    return path === pathname ? 'border-b-2 border-gray-300 border-spacing-2 border-solid' : ''
-  }
   return (
     <div className={`flex bg-[#FF971D]  fixed top-0 right-0 left-0 justify-between items-center gap-4 py-6 px-6 md:px-20 w-full min-h-20 z-[10]`}>
         <div className='flex gap-4 justify-center items-center'>
@@ -49,21 +46,21 @@ const Header = () => {
           </h1>
         </div>
         <div className='flex gap-6 justify-center items-center '>
-        <div className={`flex gap-10 text-white text-[1.05rem] font-medium`}>
+        <div className={`hidden md:flex gap-10 text-white text-[1.05rem] font-medium`}>
             {links.map((link) => (
               <Link key={link.id} href={link.url}>
                 {link.name}
               </Link>
             ))}
         </div>
-        {!user&& <MyButton link={"/login"}>Sign in</MyButton>}
+        {!user? <MyButton link={"/login"}>Sign in</MyButton>: <MyButton onClick={logoutUser}>Sign out</MyButton>}
           <div>
-              <Link href={"/cart"} className='cursor-pointer'>
+              <Link href={user?"/cart":"/login"} className='cursor-pointer'>
                 <ShoppingBag size={30} className='text-white font-bold hover:text-gray-800 duration-150'/>
               </Link>
           </div>
           <div>
-            <Link href={"/profile"}>
+            <Link href={user?"/profile":"/login"}>
               <Avatar>
                 {profile.img && <AvatarImage src={profile.img} />}
                 <AvatarFallback>CN</AvatarFallback>

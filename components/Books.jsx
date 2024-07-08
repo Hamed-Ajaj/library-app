@@ -30,7 +30,7 @@ const Books = () => {
     <div className='flex flex-col gap-8 items-center justify-center mb-20 mt-20' >
       <BooksGenre />
         <h1 className='text-[40px] font-bold '>{genre} Books</h1>
-        <div className='grid grid-cols-3 gap-x-4 gap-y-8'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-8'>
           {books && books?.map((book) => (
             <BookCard key={book.id} book={book} />
           ))}

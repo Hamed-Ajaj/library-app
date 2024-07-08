@@ -22,7 +22,7 @@ const LoginPage = () => {
         loginUser(userInfo)
     }
   return (
-    <div className='flex justify-center w-full items-center h-screen bg-white overflow-hidden'>
+    <div className='mt-20 flex justify-center w-full items-center h-screen bg-white overflow-hidden'>
         <div className="w-full md:w-1/2 flex flex-col  items-center justify-center h-screen gap-14 md:gap-20">
             <div className="flex flex-col w-[300px] md:w-[400px] justify-center items-start">
                 <h1 className="font-bold md:text-[2rem] mb-2 ">Welcome Back!</h1>
