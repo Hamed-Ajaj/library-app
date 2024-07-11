@@ -8,9 +8,7 @@ export default function Home() {
   return(
       <>
         <Hero />
-        <Suspense fallback={<progress value={44} />}>
-          <Books />
-        </Suspense>
+        <Books />
       </>
       )
 

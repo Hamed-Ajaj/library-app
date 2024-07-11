@@ -1,16 +1,12 @@
 "use client"
 import { useCart } from "@/utils/CartContext"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { X } from "lucide-react";
+
 const Cart = () => {
 
   
-  useEffect(() => {
-    getCart();
-  },[])
-  
   const { cart, removeFromCart,getCart } = useCart();
-
   return (
     
     <section className="mt-20 p-8">
@@ -23,13 +19,13 @@ const Cart = () => {
             <div className="flex-center">total</div>
           </div>
           {
-            cart.map((item) => (
-              <div key={item.id} className="grid grid-cols-4 md:gap-10 mb-4 py-4 border-b">
+            cart?.map((item) => (
+              <div key={item.$id} className="grid grid-cols-4 md:gap-10 mb-4 py-4 border-b">
                 <div className="flex items-center gap-4">
-                  <img src={item.img} alt={item.name} className="flex items-center w-32 h-32 object-cover" />
+                  <img src={item.coverImg} alt={item.title} className="flex items-center w-32 h-32 object-cover" />
                   <div className="flex-center">
-                    <h1>{item.bookName}</h1>
-                    <p>{item.desc}</p>
+                    <h1>{item.title}</h1>
+                    <p>{item.description}</p>
                   </div>
                 </div>
                 <div className="flex-center">{item.price}</div>

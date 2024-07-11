@@ -8,8 +8,8 @@ export async function GET() {
 export async function handler(req, res) {
     if (req.method === 'POST') {
         return res.status(201).json({
-            bookName:"name1",
-            price:5
+            message: 'Item added to cart',
+            item: req.body
         })
     }
 }

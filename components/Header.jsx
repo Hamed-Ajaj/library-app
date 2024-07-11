@@ -10,16 +10,6 @@ import { useProfile } from '@/utils/ProfileContext'
 import { useMotionValueEvent, useScroll } from "framer-motion"
 import { links } from '@/utils/constants'
 
-import {
-  Menubar,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarTrigger,
-} from "@/components/ui/menubar"
-
 
 
 const Header = () => {
@@ -34,8 +24,6 @@ const Header = () => {
   })
 
   const pathname = usePathname()
-  const textWhite = pathname === '/' ? 'text-white' : 'text-black'
-  const login = pathname === '/login' || pathname === '/register' ? 'hidden' : 'flex'
   const {user,logoutUser} = useAuth()
   const {profile} = useProfile()
   return (
@@ -53,7 +41,7 @@ const Header = () => {
               </Link>
             ))}
         </div>
-        {!user? <MyButton link={"/login"}>Sign in</MyButton>: <MyButton onClick={logoutUser}>Sign out</MyButton>}
+        {!user&&<MyButton link={"/login"}>Sign in</MyButton>}
           <div>
               <Link href={user?"/cart":"/login"} className='cursor-pointer'>
                 <ShoppingBag size={30} className='text-white font-bold hover:text-gray-800 duration-150'/>

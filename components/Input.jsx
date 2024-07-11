@@ -1,14 +1,15 @@
 "use client"
-import { useBooks } from '@/utils/BooksContext'
+// import { useBooks } from '@/utils/BooksContext'
 import { useState } from 'react'
-import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 const Input = () => {
     const [term, setTerm] = useState('')
-    const {setBooks,filterBooks,books} = useBooks()
-    const [searchParams] = useSearchParams()
-    const router = useRouter()
-    const {pathname} = usePathname()
+    // const {setQuery} = useBooks()
 
+    // const searchBook = (e) =>{
+    //     e.preventDefault()
+    //     setQuery(term)
+    //     setTerm('')
+    // }
 
   
 return(
@@ -17,7 +18,7 @@ return(
         <input type="text" name="search" 
         placeholder='Search Book' 
         onChange={(e) => setTerm(e.target.value)}
-        // defaultValue={searchParams.get('query')?.toString()}
+        value={term}
         className='bg-[#F5F6F8] h-[60px] px-4 pl-10 rounded-lg'/>
       </form>
     </div>

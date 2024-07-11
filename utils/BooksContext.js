@@ -1,66 +1,51 @@
 "use client"
 
-import { createContext, useState, useEffect, useContext } from "react";
-
+import { createContext, useState, useEffect, useContext, useMemo } from "react";
+import db from "@/app/database";
 const BooksContext = createContext();
 
 
 export const BooksProvider = ({ children }) => {
     const [books, setBooks] = useState(null);
+    // const [query, setQuery] = useState("");
     const [loading, setLoading] = useState(true);
-    const [genre, setGenre] = useState("All");
-
+    // const [genre, setGenre] = useState("All");
+    // console.log(query)
     const handleGenreChange = (genre) =>{
         setGenre(genre)
     }
     
     const getBooks = async () => {
-        setLoading(true);
-        const response = await fetch("http://localhost:3000/api/books");
-        const data = await response.json();
-        setBooks(data);
-        setLoading(false);
-    }
+        try {
+          setLoading(true);
+          const response = await db.books.list();
+          // Assuming response.documents is an array of books
+          setBooks(response.documents);
+        } catch (error) {
+          console.error("Error fetching books:", error);
+          // Show an error message to the user
+          // setErrorMessage("Books are not available. Please try again later.");
+        } finally {
+          setLoading(false);
+        }
+      };
+    
+    useEffect(() => {
+        getBooks()
+    },[])
 
-    const filterBooks = (books, query) => {
-        return books.filter((book) => book.bookName.toLowerCase().includes(query));
-    }
-
-    const filterBooksByGenre = (books, genre) => {
-        return books.filter((book) => book.genre.toLowerCase().includes(genre.toLowerCase()));
-    }
-
-    const addBook = async (book) => {
-        fetch('http://localhost:3000/api/books', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ title: 'Sample Book', author: 'John Doe', genre: 'Fiction', price: 200}),
-          })
-            .then((response) => response.json())
-            .then((data) => console.log(data))
-            .catch((error) => console.error('Error:', error));
-    }
 
     const contextData = {
         books,
-        setBooks,
         getBooks,
-        filterBooks,
-        filterBooksByGenre,
-        addBook,
-        genre,
-        handleGenreChange
+        // genre,
+        // setQuery
     }
 
-    useEffect(() => {
-        getBooks();
-    },[])
     
     return (
         <BooksContext.Provider value={contextData}>
-            {children}
+            {loading?<h1>loading...</h1>:children}
         </BooksContext.Provider>
     );
 }

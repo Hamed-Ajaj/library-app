@@ -1,0 +1,18 @@
+<AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <button className=' border-[#FF971D] text-[#FF971D]  font-medium border-2 hover:bg-[#f3b875] hover:text-white duration-150  flex justify-center items-center md:w-[150px] rounded-lg space-x-2 py-2'><ShoppingBag className="mr-2" /> Add To Cart</button>
+                    {/* <Button variant="outline">Show Dialog</Button> */}
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>You Have to Login!</AlertDialogTitle>
+                        <AlertDialogDescription>
+                          This action cannot be done without logging in. Please login to continue.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction>Continue</AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>

@@ -4,12 +4,13 @@ import { account } from '../Config.js'
 import { useEffect, useState } from 'react'
 import { countries } from '@/utils/constants.js'
 import { NeonGradientCard } from '@/components/magicui/neon-gradient-card.jsx'
-import MyButton from '@/components/MyButton.jsx'
+// import MyButton from '@/components/MyButton.jsx'
 import { useAuth } from '@/utils/AuthContext.js'
 const ProfilePage =  () => {
-  const {user,logoutUser} = useAuth()
+  const {logoutUser} = useAuth()
   const [userData, setUserData] = useState({})
   const [disabled, setDisabled] = useState(true)
+  console.log(process.env.NEXT_PUBLIC_BLOGIMGS_STORAGE_ID)
   const getProfile = async () => {
     try {
       let res = await account.get()
@@ -36,7 +37,7 @@ const ProfilePage =  () => {
 
   const upperCaseName =userData.name ?userData.name.toUpperCase() : ""
 
-  const date =userData["$createdAt"] ? transformDate(user["$createdAt"]):""
+  const date =userData["$createdAt"] ? transformDate(userData["$createdAt"]):""
   return (
     <section className='p-20 mt-10 bg-[#f0efef] min-h-screen'>
       <header className='flex justify-between items-center'>
@@ -74,11 +75,11 @@ const ProfilePage =  () => {
               <div className='flex flex-col gap-4 px-4'>
                 <div className='flex flex-col gap-2'>
                   <label htmlFor="name" className='text-[#bcbcbc]'>Name</label>
-                  <input type="text" disabled={disabled} name="name" id="name" value={user.name} className='py-3 px-4 rounded-lg border border-[#bcbcbc]' />
+                  <input type="text" disabled={disabled} name="name" id="name" value={userData.name} className='py-3 px-4 rounded-lg border border-[#bcbcbc]' />
                 </div>
                 <div className='flex flex-col gap-2'>
                   <label htmlFor="email" className='text-[#bcbcbc]'>Email</label>
-                  <input type="email" disabled={disabled} name="email" id="email" value={user.email} className='py-3 px-4 rounded-lg border border-[#bcbcbc]' />
+                  <input type="email" disabled={disabled} name="email" id="email" value={userData.email} className='py-3 px-4 rounded-lg border border-[#bcbcbc]' />
                 </div>
                 <div className='flex flex-col gap-2'>
                   <label htmlFor="password" className='text-[#bcbcbc]'>Password</label>

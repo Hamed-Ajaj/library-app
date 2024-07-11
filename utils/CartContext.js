@@ -1,33 +1,41 @@
 "use client"
 
-import { DELETE, POST } from "@/app/api/cart/route";
-import { createContext, useState, useEffect, useContext } from "react";
 
+import { createContext, useState, useEffect, useContext } from "react";
+// import { Query } from "appwrite";
+import db from "@/app/database";
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState(null);
     const [loading,setLoading] = useState(null)
     const getCart = async () => {
-        setLoading(true)
-        const cart = await fetch("http://localhost:3000/api/cart");
-        const cartData = await cart.json();
-        setCart(cartData);
-        setLoading(false)
+        try {
+            setLoading(true)
+            const response = await db.cart.list();
+            setCart(response.documents);
+            setLoading(false)
+        } catch (error) {
+            console.error("The id is not available")
+            setLoading(false)
+        }
+       
     }
     const addToCart = (product) => {
-        // const addProduct = fetch("http://localhost:3000/api/cart", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: (product),
-        // });
-        // if (!addProduct.ok) {
-        //     throw new Error("Failed to add product to cart");
-        // }
-        // console.log(product)
-        setCart([...cart, product]);
+        try {
+            const item = cart.find((item) => item.id === product.id);
+            if (item) {
+                item.quantity += 1;
+                db.cart.update(item.$id, item);
+                setCart([...cart]);
+            } else {
+                db.cart.create(product);
+                setCart([...cart, product]);
+            }
+        } catch (error) {
+            console.error("The id is not available")
+        }
+        
     }
 
     const removeFromCart = async (productId) => {
