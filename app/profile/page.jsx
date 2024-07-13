@@ -10,7 +10,6 @@ const ProfilePage =  () => {
   const {logoutUser} = useAuth()
   const [userData, setUserData] = useState({})
   const [disabled, setDisabled] = useState(true)
-  console.log(process.env.NEXT_PUBLIC_BLOGIMGS_STORAGE_ID)
   const getProfile = async () => {
     try {
       let res = await account.get()
