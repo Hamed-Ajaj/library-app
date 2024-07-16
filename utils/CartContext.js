@@ -22,53 +22,69 @@ export const CartProvider = ({ children }) => {
         }
        
     }
-    const addToCart = (product) => {
+    const addToCart =  (product) => {
         try {
-                db.cart.create(product);
-                setCart([...cart, {title:"no title",...product}]);
+                    setLoading(true)
+                    db.cart.create(product);
+                    setCart([...cart, {title:"no title",...product}]);
+                    setLoading(false)
         } catch (error) {
             console.log("there is something")
+            setLoading(false)
         }
         
     }
 
     const addQuantity = async (productId) => {
-        const item = await db.cart.get(productId);
-        db.cart.update( productId, { quantity: item?.quantity + 1 })
-
         setCart(cart.map((product) => {
             if (product.$id === productId) {
                 return { ...product, quantity: product.quantity + 1 };
             }
             return product;
         }));
+        const item = await db.cart.get(productId);
+        db.cart.update( productId, { quantity: item?.quantity + 1 })
+
 
     }
 
     const removeQuantity = async (productId) => {
-        const item = await db.cart.get(productId);
-        db.cart.update( productId, { quantity: item?.quantity - 1 })
+        const item = getItemById(productId)
+        
         
         setCart(cart.map((product) => {
             if (product.$id === productId) {
-                return { ...product, quantity: product.quantity - 1 };
+                return { ...product, quantity: product.quantity-1 };
             }
             return product;
         }));
+
+        // const item = await db.cart.get(productId);
+        await db.cart.update( productId, { quantity: item?.quantity - 1 })
+        
+
     }
 
     const removeFromCart = async (productId) => {
         try {
-            db.cart.delete(productId);
+            setLoading(true)
+            await db.cart.delete(productId);
             setCart(cart.filter((product) => product.$id !== productId));
+            setLoading(false)
         } catch (error) {
             console.error("The id is not available")
+            setLoading(false)
         }
+    }
+
+    const getItemById = async (productId) => {
+        const item = await db.cart.get(productId);
+        return item;
     }
 
     useEffect(() => {
         getCart();
-    }, []);
+    }, [cart]);
 
     const contextData = {
         getCart,
@@ -76,7 +92,8 @@ export const CartProvider = ({ children }) => {
         addToCart,
         addQuantity,
         removeQuantity,
-        removeFromCart
+        removeFromCart,
+        loading
     }
 
     return (
